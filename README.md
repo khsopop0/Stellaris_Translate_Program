@@ -21,3 +21,8 @@
 - 현재 업로드 된 파일들을 볼 수 있으며, 파일의 삭제를 자유자재로 할 수 있습니다.
 - 파일을 더블 클릭하면, 해당 파일을 삭제합니다.
 - 파일을 원하는 만큼 Shift를 통해 선택한 후, Delete를 입력해 삭제할 수 있습니다.
+
+
+<실행 파일 다운로드>
+
+https://drive.google.com/file/d/1_3Rzh_jTuMXqos2LTVrwdxSUtXGycI8s/view?usp=sharing
