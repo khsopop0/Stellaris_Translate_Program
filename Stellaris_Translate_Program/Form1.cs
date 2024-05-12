@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Stellaris_Translate_Program
@@ -18,6 +15,7 @@ namespace Stellaris_Translate_Program
         private List<string> selectedFiles = new List<string>(); // 파일의 전체 이름 목록
         private Dictionary<string, string> fileMap = new Dictionary<string, string>(); // 파일명 => 전체 경로
         ListBox fileListBox;
+        ComboBox selectFileType;
         float fontSize;
 
         public Form1()
@@ -33,15 +31,25 @@ namespace Stellaris_Translate_Program
                 SelectionMode = SelectionMode.MultiExtended,
             };
 
-            List<Control> controls = new List<Control>() { fileListBox, FileUploadButton, parsingButton, parsingCheckBox, savePathTextBox };
+            selectFileType = new ComboBox
+            {
+                Name = "selectFileType",
+                DropDownStyle = ComboBoxStyle.DropDownList,
+                Location = new System.Drawing.Point(10, 10)
+            };
+            selectFileType.Items.AddRange(new string[] { ".yml", ".txt" });
+            selectFileType.SelectedIndex = 1;
 
-            AdjustListBoxSizeAndPosition(fileListBox);
+            List<Control> controls = new List<Control>() { fileListBox, FileUploadButton, parsingButton, parsingCheckBox, savePathTextBox, selectFileType};
+
+            AdjustListBoxSizeAndPosition(fileListBox, selectFileType);
             AdjustFontSize(controls);
             Controls.Add(fileListBox);
+            Controls.Add(selectFileType);
             fileListBox.DoubleClick += fileListBox_DoubleClick;
 
             // 이벤트 핸들러에서 폼의 크기 변경에 반응해, 크기 및 위치 조정
-            Resize += (sender, e) => AdjustListBoxSizeAndPosition(fileListBox);
+            Resize += (sender, e) => AdjustListBoxSizeAndPosition(fileListBox, selectFileType);
             Resize += (sender, e) => AdjustFontSize(controls);
         }
 
@@ -70,7 +78,7 @@ namespace Stellaris_Translate_Program
             }
         }
 
-        private void AdjustListBoxSizeAndPosition(ListBox listBox)
+        private void AdjustListBoxSizeAndPosition(ListBox listBox, ComboBox selectFileType)
         {
             listBox.Left = ClientSize.Width * 5 / 100;
             listBox.Top = ClientSize.Height * 5 / 100;
@@ -92,6 +100,11 @@ namespace Stellaris_Translate_Program
             parsingCheckBox.Width = ClientSize.Width * 20 / 100;
             parsingCheckBox.Height = ClientSize.Height * 8 / 100;
 
+            selectFileType.Left = ClientSize.Width * 70 / 100;
+            selectFileType.Top = ClientSize.Height * 34 / 100;
+            selectFileType.Width = ClientSize.Width * 20 / 100;
+            selectFileType.Height = ClientSize.Height * 6 / 100;
+
             savePathTextBox.Left = ClientSize.Width * 50 / 100;
             savePathTextBox.Top = ClientSize.Height * 90 / 100;
             savePathTextBox.Width = ClientSize.Width * 45 / 100;
@@ -106,11 +119,12 @@ namespace Stellaris_Translate_Program
                 float sizeMultiplier;
                 switch (ctrl.Name)
                 {
-                    case "fileListBox": sizeMultiplier = 0.7f; break;
+                    case "fileListBox": sizeMultiplier = 0.78f; break;
                     case "FileUploadButton": sizeMultiplier = 1; break;
                     case "parsingButton": sizeMultiplier = 1; break;
                     case "parsingCheckBox": sizeMultiplier = 0.86f; break;
-                    case "savePathTextBox": sizeMultiplier = 0.7f; break;
+                    case "savePathTextBox": sizeMultiplier = 0.78f; break;
+                    case "selectFileType": sizeMultiplier = 0.86f; break;
                     default: sizeMultiplier = 1; break;
                 }
                 ctrl.Font = new Font(ctrl.Font.FontFamily, fontSize * sizeMultiplier, ctrl.Font.Style);
@@ -170,14 +184,14 @@ namespace Stellaris_Translate_Program
 
         private void ParseFileButton_Click(object sender, EventArgs e)
         {
-            Regex regex = new Regex("\"([^\"]*)\""); // 큰 따옴표 포함
+            Regex regex = new Regex("\"([^\"]*)\"");
 
             string directoryPath = savePathTextBox.Text.Trim();
 
             if (!string.IsNullOrEmpty(directoryPath) && !Directory.Exists(directoryPath))
             {
                 MessageBox.Show("해당 경로는 존재하지 않는 경로입니다. 다시 설정해주세요.", "경로 오류", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return; // 경고 메시지 후 파싱 작업 중단
+                return;
             }
 
             foreach (string filePath in selectedFiles)
@@ -211,12 +225,12 @@ namespace Stellaris_Translate_Program
             if (!string.IsNullOrEmpty(directoryPath))
             {
                 // 입력한 경로에 새 파일 이름을 추가
-                string fileName = Path.GetFileNameWithoutExtension(filePath) + ".txt";
+                string fileName = Path.GetFileNameWithoutExtension(filePath) + selectFileType.SelectedItem.ToString();
                 return Path.Combine(directoryPath, fileName);
             } else
             {
                 // 기존 파일 위치에 새 파일 생성
-                return Path.ChangeExtension(filePath, ".txt");
+                return Path.ChangeExtension(filePath, selectFileType.SelectedItem.ToString());
             }
         }
 
@@ -229,6 +243,7 @@ namespace Stellaris_Translate_Program
         {
 
         }
+
     }
 
     public static class Settings
