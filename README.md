@@ -23,6 +23,6 @@
 - 파일을 원하는 만큼 Shift를 통해 선택한 후, Delete를 입력해 삭제할 수 있습니다.
 
 
-<실행 파일 다운로드>
 
+<실행 파일 다운로드>
 https://drive.google.com/file/d/1_3Rzh_jTuMXqos2LTVrwdxSUtXGycI8s/view?usp=sharing
