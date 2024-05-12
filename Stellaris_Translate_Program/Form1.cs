@@ -25,22 +25,9 @@ namespace Stellaris_Translate_Program
             KeyPreview = true;  // 폼에서 키보드 이벤트를 미리 보기 위해 설정
             KeyDown += new KeyEventHandler(Form1_KeyDown);  // Delete 키로 다중 삭제 작업 처리
 
-            fileListBox = new ListBox
-            {
-                Name = "fileListBox",
-                SelectionMode = SelectionMode.MultiExtended,
-            };
+            Initialize();
 
-            selectFileType = new ComboBox
-            {
-                Name = "selectFileType",
-                DropDownStyle = ComboBoxStyle.DropDownList,
-                Location = new System.Drawing.Point(10, 10)
-            };
-            selectFileType.Items.AddRange(new string[] { ".yml", ".txt" });
-            selectFileType.SelectedIndex = 1;
-
-            List<Control> controls = new List<Control>() { fileListBox, FileUploadButton, parsingButton, parsingCheckBox, savePathTextBox, selectFileType};
+            List<Control> controls = new List<Control>() { fileListBox, FileUploadButton, parsingButton, parsingCheckBox, savePathTextBox, selectFileType, label1 };
 
             AdjustListBoxSizeAndPosition(fileListBox, selectFileType);
             AdjustFontSize(controls);
@@ -55,11 +42,30 @@ namespace Stellaris_Translate_Program
 
         void SettingForm1(Form form)
         {
-            form.Size = new Size(800, 600);
+            form.Size = new Size(700, 500);
             form.BackColor = Color.LightGray;
             form.StartPosition = FormStartPosition.CenterScreen;
-            form.Text = "모드 번역 파싱 보조 프로그램";
+            form.Text = "파싱 보조 프로그램 1.11v";
         }
+        void Initialize()
+        {
+            fileListBox = new ListBox
+            {
+                Name = "fileListBox",
+                SelectionMode = SelectionMode.MultiExtended,
+            };
+
+            selectFileType = new ComboBox
+            {
+                Name = "selectFileType",
+                DropDownStyle = ComboBoxStyle.DropDownList,
+                Location = new System.Drawing.Point(10, 10)
+            };
+            selectFileType.Items.AddRange(new string[] { ".yml", ".txt" });
+            selectFileType.SelectedIndex = 1;
+        }
+
+
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -110,6 +116,11 @@ namespace Stellaris_Translate_Program
             savePathTextBox.Width = ClientSize.Width * 45 / 100;
             savePathTextBox.Height = ClientSize.Height * 8 / 100;
 
+            label1.Left = ClientSize.Width * 50 / 100;
+            label1.Top = ClientSize.Height * 86 / 100;
+            label1.Width = ClientSize.Width * 45 / 100;
+            label1.Height = ClientSize.Height * 8 / 100;
+
         }
         void AdjustFontSize(List<Control> controlsToResize)
         {
@@ -125,7 +136,7 @@ namespace Stellaris_Translate_Program
                     case "parsingCheckBox": sizeMultiplier = 0.86f; break;
                     case "savePathTextBox": sizeMultiplier = 0.78f; break;
                     case "selectFileType": sizeMultiplier = 0.86f; break;
-                    default: sizeMultiplier = 1; break;
+                    default: sizeMultiplier = 0.8f; break;
                 }
                 ctrl.Font = new Font(ctrl.Font.FontFamily, fontSize * sizeMultiplier, ctrl.Font.Style);
             }
