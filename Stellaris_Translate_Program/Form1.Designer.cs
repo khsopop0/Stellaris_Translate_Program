@@ -35,6 +35,12 @@
             this.savePathTextBox = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.label1 = new System.Windows.Forms.Label();
+            this.savePathTextBox2 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.useNameCheckBox = new System.Windows.Forms.CheckBox();
+            this.combineButton = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.savePathTextBox3 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // FileUploadButton
@@ -77,12 +83,11 @@
             // 
             this.savePathTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.savePathTextBox.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.savePathTextBox.Location = new System.Drawing.Point(367, 354);
+            this.savePathTextBox.Location = new System.Drawing.Point(367, 372);
             this.savePathTextBox.Multiline = true;
             this.savePathTextBox.Name = "savePathTextBox";
-            this.savePathTextBox.Size = new System.Drawing.Size(367, 52);
+            this.savePathTextBox.Size = new System.Drawing.Size(313, 34);
             this.savePathTextBox.TabIndex = 3;
-            this.savePathTextBox.TextChanged += new System.EventHandler(this.savePathTextBox_TextChanged);
             // 
             // contextMenuStrip1
             // 
@@ -93,17 +98,88 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label1.Location = new System.Drawing.Point(367, 336);
+            this.label1.Location = new System.Drawing.Point(364, 354);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 15);
+            this.label1.Size = new System.Drawing.Size(123, 15);
             this.label1.TabIndex = 4;
-            this.label1.Text = "저장 경로";
+            this.label1.Text = "저장 경로 (내용 파일)";
+            // 
+            // savePathTextBox2
+            // 
+            this.savePathTextBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.savePathTextBox2.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.savePathTextBox2.Location = new System.Drawing.Point(367, 305);
+            this.savePathTextBox2.Multiline = true;
+            this.savePathTextBox2.Name = "savePathTextBox2";
+            this.savePathTextBox2.Size = new System.Drawing.Size(311, 36);
+            this.savePathTextBox2.TabIndex = 5;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label2.Location = new System.Drawing.Point(364, 287);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(123, 15);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "저장 경로 (이름 파일)";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
+            // 
+            // useNameCheckBox
+            // 
+            this.useNameCheckBox.AutoSize = true;
+            this.useNameCheckBox.Font = new System.Drawing.Font("맑은 고딕", 7F);
+            this.useNameCheckBox.Location = new System.Drawing.Point(530, 178);
+            this.useNameCheckBox.Name = "useNameCheckBox";
+            this.useNameCheckBox.Size = new System.Drawing.Size(174, 16);
+            this.useNameCheckBox.TabIndex = 7;
+            this.useNameCheckBox.Text = "파싱 시 이름 파일을 별도로 저장";
+            this.useNameCheckBox.UseVisualStyleBackColor = true;
+            this.useNameCheckBox.CheckedChanged += new System.EventHandler(this.useNameCheckBox_CheckedChanged);
+            // 
+            // combineButton
+            // 
+            this.combineButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.combineButton.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.combineButton.Location = new System.Drawing.Point(530, 211);
+            this.combineButton.Name = "combineButton";
+            this.combineButton.Size = new System.Drawing.Size(134, 33);
+            this.combineButton.TabIndex = 8;
+            this.combineButton.Text = "파일 결합";
+            this.combineButton.UseVisualStyleBackColor = true;
+            this.combineButton.Click += new System.EventHandler(this.combineButton_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label3.Location = new System.Drawing.Point(364, 230);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(123, 15);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "저장 경로 (결합 파일)";
+            // 
+            // savePathTextBox3
+            // 
+            this.savePathTextBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.savePathTextBox3.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.savePathTextBox3.Location = new System.Drawing.Point(367, 248);
+            this.savePathTextBox3.Multiline = true;
+            this.savePathTextBox3.Name = "savePathTextBox3";
+            this.savePathTextBox3.Size = new System.Drawing.Size(311, 36);
+            this.savePathTextBox3.TabIndex = 9;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(746, 418);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.savePathTextBox3);
+            this.Controls.Add(this.combineButton);
+            this.Controls.Add(this.useNameCheckBox);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.savePathTextBox2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.savePathTextBox);
             this.Controls.Add(this.parsingCheckBox);
@@ -125,6 +201,12 @@
         private System.Windows.Forms.TextBox savePathTextBox;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox savePathTextBox2;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox useNameCheckBox;
+        private System.Windows.Forms.Button combineButton;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox savePathTextBox3;
     }
 }
 
