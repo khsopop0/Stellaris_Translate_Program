@@ -27,7 +27,7 @@ namespace Stellaris_Translate_Program
 
             Initialize();
 
-            List<Control> controls = new List<Control>() { fileListBox, FileUploadButton, parsingButton, parsingCheckBox, savePathTextBox, selectFileType, label1, savePathTextBox2, label2, useNameCheckBox, combineButton, savePathTextBox3, label3};
+            List<Control> controls = new List<Control>() { fileListBox, FileUploadButton, parsingButton, parsingCheckBox, savePathTextBox, selectFileType, label1, savePathTextBox2, label2, useNameCheckBox, combineButton, savePathTextBox3, label3 };
 
             AdjustListBoxSizeAndPosition(fileListBox, selectFileType);
             AdjustFontSize(controls);
@@ -36,13 +36,23 @@ namespace Stellaris_Translate_Program
             fileListBox.DoubleClick += fileListBox_DoubleClick;
 
             // 이벤트 핸들러에서 폼의 크기 변경에 반응해, 크기 및 위치 조정
-            Resize += (sender, e) => AdjustListBoxSizeAndPosition(fileListBox, selectFileType);
-            Resize += (sender, e) => AdjustFontSize(controls);
+            Resize += (sender, e) => Form1_Resize(sender, e, controls);
 
             // 이벤트 핸들러 추가
             savePathTextBox.Click += new EventHandler(savePathTextBox_Click);
             savePathTextBox2.Click += new EventHandler(savePathTextBox2_Click);
             savePathTextBox3.Click += new EventHandler(savePathTextBox3_Click);
+        }
+        private void Form1_Resize(object sender, EventArgs e, List<Control> controls)
+        {
+            // 폼이 최소화되었는지 확인
+            if (WindowState == FormWindowState.Minimized)
+            {
+                return;
+            }
+
+            AdjustListBoxSizeAndPosition(fileListBox, selectFileType);
+            AdjustFontSize(controls);
         }
 
         void SettingForm1(Form form)
@@ -67,9 +77,13 @@ namespace Stellaris_Translate_Program
                 Location = new System.Drawing.Point(10, 10)
             };
             selectFileType.Items.AddRange(new string[] { ".yml", ".txt" });
-            selectFileType.SelectedIndex = 1;
+            selectFileType.SelectedIndex = 0;
         }
-
+                void UIThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
+        {
+            // 예외 처리 로직
+            MessageBox.Show("예기치 않은 오류가 발생했습니다: " + e.Exception.Message, "오류. khsopop00@gmail.com << 이 주소로 개발자에게 문의 해 주세요.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -442,6 +456,7 @@ namespace Stellaris_Translate_Program
                     string combinedFilePath = Path.Combine(targetDirectory, Path.GetFileNameWithoutExtension(originalFile) + selectedFileType);
                     using (StreamWriter writer = new StreamWriter(combinedFilePath))
                     {
+                        writer.WriteLine("l_korean:"); // 첫 번째 줄에 추가
                         for (int i = 0; i < contentLines.Length; i++)
                         {
                             writer.WriteLine($"{precedingLines[i]} {contentLines[i]}");
